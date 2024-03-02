@@ -99,7 +99,7 @@ let addTwoBinaryLists binList1 binList2 =
 
 // -----------------------------------------------------------------------------------------------------
 // 2 compliment 
-// should i use |>
+// should i use |> not sure if you can here... 
 let twosCompliement binList =
     // our loop with accumalter and carry
     let notBinList = notPipeline binList
@@ -110,7 +110,6 @@ let twosCompliement binList =
 
 // -----------------------------------------------------------------------------------------------------
 // takes in a number and returns the signed 8 bist base 2 list  
-// should i use |>
 let  signedToBase2List num =
     // our loop with accumalter and carry
     if num < 0 then
@@ -124,7 +123,6 @@ let  signedToBase2List num =
 
 // -----------------------------------------------------------------------------------------------------
 // takes in a bit list and returns the signed number   
-// should i use |>
 let  base2ListToSigned (bitlist: int list) =
     // our loop with accumalter and carry
     if bitlist.Head = 1 then
