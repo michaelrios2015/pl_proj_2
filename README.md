@@ -1,6 +1,6 @@
 example output 
 
-'''
+```
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): not
 Enter Hex value: 45
 Result of NOT [0; 1; 0; 0; 0; 1; 0; 1] = [1; 0; 1; 1; 1; 0; 1; 0] = BA
@@ -47,4 +47,4 @@ SUB      [1; 0; 0; 1; 1; 1; 0; 1]
 
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): q
 GOOD BYE!!
-'''
+```
