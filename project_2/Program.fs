@@ -164,6 +164,7 @@ let printnice bitlist1 bitlist2 operator=
 // -----------------------------------------------------------------------------------------------------
 // stolen from professor, works fine could use more subprograms
 //I have a feeling that my loop is not set up correctly but it works so I am keeping it till i learn more
+//would be better if I made subprograms instead of repeating code...
 
 let result () =
 
