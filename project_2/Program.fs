@@ -125,7 +125,14 @@ let  signedToBase2List num =
         |> twosCompliement
     //it's a positive number so just used unsigned function
     |_-> unsignedToBase2List num
-    
+
+// -----------------------------------------------------------------------------------------------------
+// SUBTRACTING 
+
+// subtracting is just multiplying the second number by -1
+//which is this case just means running it through two's compliement and then adding the two numbers :) 
+let subTwoBinaryLists binList1 binList2 =
+    addTwoBinaryLists binList1 (twosCompliement binList2)
 
 // -----------------------------------------------------------------------------------------------------
 // takes in a bit list and returns the signed number   
@@ -163,110 +170,101 @@ let printnice bitlist1 bitlist2 operator=
 
 // -----------------------------------------------------------------------------------------------------
 // stolen from professor, works fine could use more subprograms
-//I have a feeling that my loop is not set up correctly but it works so I am keeping it till i learn more
-//would be better if I made subprograms instead of repeating code...
+//Ok I think the loop is working correctly... also stolen from professor
+//idealy they would be more subprograms and less repeated code... will change if there is time,
+//also want to read more of the textbook so might just stay like this 
 
 let result () =
 
-    let rec loop ans =
-        match ans with
-        | yes ->
-            printf "\nEnter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): "
-            let operator = System.Console.ReadLine().ToUpper()
-            match operator with
-            | "NOT" ->
-                printf "Enter Hex value: "
-                //get input
-                let byte = System.Console.ReadLine()
-                // convert to unsigned list 
-                let tmp1 = (StringToInt byte 16 |> unsignedToBase2List)
-                //run it through not pipeline
-                let tmp2 = (notPipeline tmp1)
-                //print results
-                printfn $"Result of NOT %A{tmp1} = %A{tmp2} = %X{base2listtoUnsigned tmp2}"
-                loop "yes"
-                //true
-            | "AND" -> 
-                //pretty much same as above but with two inputs
-                printf "Enter Hex value: "
-                let byte = System.Console.ReadLine()
-                let tmp = (StringToInt byte 16 |> unsignedToBase2List)
-                printf "Enter Hex value: "
-                let byte2 = System.Console.ReadLine()
-                let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
-                let ans = andPipeline tmp tmp2
-                printnice tmp tmp2 operator
-                printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
-                loop "yes"
-                //true
-            | "OR" -> 
-                printf "Enter Hex value: "
-                let byte = System.Console.ReadLine()
-                let tmp = (StringToInt byte 16 |> unsignedToBase2List)
-                printf "Enter Hex value: "
-                let byte2 = System.Console.ReadLine()
-                let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
-                let ans = orPipeline tmp tmp2
-                printnice tmp tmp2 operator
-                printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
-                loop "yes"
-                //true
-            | "XOR" -> 
-                printf "Enter Hex value: "
-                let byte = System.Console.ReadLine()
-                let tmp = (StringToInt byte 16 |> unsignedToBase2List)
-                printf "Enter Hex value: "
-                let byte2 = System.Console.ReadLine()
-                let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
-                let ans = xorPipeline tmp tmp2
-                printnice tmp tmp2 operator
-                printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
-                loop "yes"
-                //true
-            | "ADD" -> 
-                //take in first number 
-                printf "Enter first number : "
-                let byte = System.Console.ReadLine()
-                // turn it into a signed base 2 list
-                let tmp = (StringToInt byte 10 |> signedToBase2List)
-                //repeat for second number 
-                printf "Enter second number: "
-                let byte2 = System.Console.ReadLine()
-                let tmp2 = (StringToInt byte2 10 |> signedToBase2List)
-                //add the two 
-                let ans = addTwoBinaryLists tmp tmp2
-                //print it 
-                printnice tmp tmp2 operator
-                printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
-                loop "yes"
-                //true
-            //minus should be pretty simil;ar but I need to multiple the second number by -1 first 
-            | "SUB" -> 
-                //same as above
-                printf "Enter first number : "
-                let byte = System.Console.ReadLine()
-                let tmp = (StringToInt byte 10 |> signedToBase2List)
-                printf "Enter second number: "
-                let byte2 = System.Console.ReadLine()
-                //so just multiplinhg the second number by minus 1, since we are adding our two numbers
-                let tmp2 = ((StringToInt byte2 10) * -1 |> signedToBase2List) 
-                //this is just so we can dispaly the bit two list correctly for the print function
-                let tmp3 = ((StringToInt byte2 10) |> signedToBase2List) 
-                //we can now add number one to the negative of number two
-                let ans = addTwoBinaryLists tmp tmp2
-                //print it nicely
-                printnice tmp tmp3 operator
-                printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
-                loop "yes"
-                //true
-            | "QUIT" |_ -> 
-                printfn $"GOOD BYE!!"
-                //loop "no"
-                //I have no clue why this stops the program but it does so I am sticking with it 
-                true
+    printf "\nEnter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): "
+    let operator = System.Console.ReadLine().ToUpper()
+    match operator with
+    | "NOT" ->
+        printf "Enter Hex value: "
+        //get input
+        let byte = System.Console.ReadLine()
+        // convert to unsigned list 
+        let tmp1 = (StringToInt byte 16 |> unsignedToBase2List)
+        //run it through not pipeline
+        let tmp2 = (notPipeline tmp1)
+        //print results
+        printfn $"Result of NOT %A{tmp1} = %A{tmp2} = %X{base2listtoUnsigned tmp2}"
+        true
+    | "AND" -> 
+        //pretty much same as above but with two inputs
+        printf "Enter Hex value: "
+        let byte = System.Console.ReadLine()
+        let tmp = (StringToInt byte 16 |> unsignedToBase2List)
+        printf "Enter Hex value: "
+        let byte2 = System.Console.ReadLine()
+        let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
+        let ans = andPipeline tmp tmp2
+        printnice tmp tmp2 operator
+        printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        true
+    | "OR" -> 
+        printf "Enter Hex value: "
+        let byte = System.Console.ReadLine()
+        let tmp = (StringToInt byte 16 |> unsignedToBase2List)
+        printf "Enter Hex value: "
+        let byte2 = System.Console.ReadLine()
+        let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
+        let ans = orPipeline tmp tmp2
+        printnice tmp tmp2 operator
+        printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        true
+    | "XOR" -> 
+        printf "Enter Hex value: "
+        let byte = System.Console.ReadLine()
+        let tmp = (StringToInt byte 16 |> unsignedToBase2List)
+        printf "Enter Hex value: "
+        let byte2 = System.Console.ReadLine()
+        let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
+        let ans = xorPipeline tmp tmp2
+        printnice tmp tmp2 operator
+        printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        true
+    | "ADD" -> 
+        //take in first number 
+        printf "Enter first number : "
+        let byte = System.Console.ReadLine()
+        // turn it into a signed base 2 list
+        let tmp = (StringToInt byte 10 |> signedToBase2List)
+        //repeat for second number 
+        printf "Enter second number: "
+        let byte2 = System.Console.ReadLine()
+        let tmp2 = (StringToInt byte2 10 |> signedToBase2List)
+        //add the two 
+        let ans = addTwoBinaryLists tmp tmp2
+        //print it 
+        printnice tmp tmp2 operator
+        printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+        true
+    //minus should be pretty simil;ar but I need to multiple the second number by -1 first 
+    | "SUB" -> 
+        //same as above
+        printf "Enter first number : "
+        let byte = System.Console.ReadLine()
+        let tmp = (StringToInt byte 10 |> signedToBase2List)
+        printf "Enter second number: "
+        let byte2 = System.Console.ReadLine()
+        let tmp2 = ((StringToInt byte2 10) |> signedToBase2List) 
+        //we can now send to the new SUB funtion
+        let ans = subTwoBinaryLists tmp tmp2
+        //print it nicely
+        printnice tmp tmp2 operator
+        printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+        true
+    | "QUIT" |_ -> 
+        printfn $"GOOD BYE!!"
+        false
+       
 
-        //|_-> false
-    
-    loop "yes"
+let rec prog () =
+    // so it runs restults and just keeps looping till result returns false
+    match result () with
+    //so this just says do nothing and the program exits.. neat :) 
+    | false -> ()
+    | _ -> prog ()
 
-result()
+prog()
