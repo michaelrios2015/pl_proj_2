@@ -163,10 +163,33 @@ let  base2ListToSigned (bitlist: int list) =
 // print not sure if this really adds much.. it's very good for certain operations as it makes checking them much easier and not so 
 //good for others 
 
-let printnice bitlist1 bitlist2 operator=
+let printnice bitlist1 bitlist2 operator ans vType=
     printfn $"\t %A{bitlist1}"
     printfn $"%s{operator}\t %A{bitlist2}"
     printfn $"--------------------------------------------"
+    match vType with
+    | "hex" -> printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+    | "dec" -> printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+
+// -----------------------------------------------------------------------------------------------------
+// input function so the main function is a little tighter  
+
+let input vType= 
+
+    // so it just expects to get hexidecial or regular decimal numers
+    match vType with
+    |"hex" ->
+        printf "Enter Hex value between 00 and FF: "
+        //get input
+        let byte = System.Console.ReadLine()
+        //change it to a number and change that number into an unsigned base 2 list
+        StringToInt byte 16 |> unsignedToBase2List
+    |"dec"-> 
+        //same as above but know with regular decimal numbers
+        printf "Enter a number between -128 and 127: "
+        let byte = System.Console.ReadLine()
+        // turn it into a signed base 2 list
+        StringToInt byte 10 |> signedToBase2List
 
 // -----------------------------------------------------------------------------------------------------
 // stolen from professor, works fine could use more subprograms
@@ -180,80 +203,54 @@ let result () =
     let operator = System.Console.ReadLine().ToUpper()
     match operator with
     | "NOT" ->
-        printf "Enter Hex value: "
-        //get input
-        let byte = System.Console.ReadLine()
-        // convert to unsigned list 
-        let tmp1 = (StringToInt byte 16 |> unsignedToBase2List)
+        let tmp1 = input("hex")
         //run it through not pipeline
-        let tmp2 = (notPipeline tmp1)
+        let tmp2 = notPipeline tmp1
         //print results
         printfn $"Result of NOT %A{tmp1} = %A{tmp2} = %X{base2listtoUnsigned tmp2}"
         true
     | "AND" -> 
-        //pretty much same as above but with two inputs
-        printf "Enter Hex value: "
-        let byte = System.Console.ReadLine()
-        let tmp = (StringToInt byte 16 |> unsignedToBase2List)
-        printf "Enter Hex value: "
-        let byte2 = System.Console.ReadLine()
-        let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
-        let ans = andPipeline tmp tmp2
-        printnice tmp tmp2 operator
-        printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        // get user input
+        let tmp1 =  input("hex") 
+        let tmp2 =  input("hex")
+        //run it through pipeline
+        let ans = andPipeline tmp1 tmp2
+        //print results
+        printnice tmp1 tmp2 operator ans "hex"
+        //printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
         true
     | "OR" -> 
-        printf "Enter Hex value: "
-        let byte = System.Console.ReadLine()
-        let tmp = (StringToInt byte 16 |> unsignedToBase2List)
-        printf "Enter Hex value: "
-        let byte2 = System.Console.ReadLine()
-        let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
-        let ans = orPipeline tmp tmp2
-        printnice tmp tmp2 operator
-        printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        //the rest follow the same pattern
+        let tmp1 = input("hex")
+        let tmp2 = input("hex")
+        let ans = orPipeline tmp1 tmp2
+        printnice tmp1 tmp2 operator ans "hex"
+        //printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
         true
     | "XOR" -> 
-        printf "Enter Hex value: "
-        let byte = System.Console.ReadLine()
-        let tmp = (StringToInt byte 16 |> unsignedToBase2List)
-        printf "Enter Hex value: "
-        let byte2 = System.Console.ReadLine()
-        let tmp2 = (StringToInt byte2 16 |> unsignedToBase2List)
-        let ans = xorPipeline tmp tmp2
-        printnice tmp tmp2 operator
-        printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        let tmp1 = input("hex")
+        let tmp2 = input("hex")
+        let ans = xorPipeline tmp1 tmp2
+        printnice tmp1 tmp2 operator ans "hex"
+        //printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
         true
     | "ADD" -> 
-        //take in first number 
-        printf "Enter first number : "
-        let byte = System.Console.ReadLine()
-        // turn it into a signed base 2 list
-        let tmp = (StringToInt byte 10 |> signedToBase2List)
-        //repeat for second number 
-        printf "Enter second number: "
-        let byte2 = System.Console.ReadLine()
-        let tmp2 = (StringToInt byte2 10 |> signedToBase2List)
+        let tmp1 = input("dec") 
+        let tmp2 = input("dec")
         //add the two 
-        let ans = addTwoBinaryLists tmp tmp2
+        let ans = addTwoBinaryLists tmp1 tmp2
         //print it 
-        printnice tmp tmp2 operator
-        printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+        printnice tmp1 tmp2 operator ans "dec"
+        //printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
         true
     //minus should be pretty simil;ar but I need to multiple the second number by -1 first 
     | "SUB" -> 
-        //same as above
-        printf "Enter first number : "
-        let byte = System.Console.ReadLine()
-        let tmp = (StringToInt byte 10 |> signedToBase2List)
-        printf "Enter second number: "
-        let byte2 = System.Console.ReadLine()
-        let tmp2 = ((StringToInt byte2 10) |> signedToBase2List) 
-        //we can now send to the new SUB funtion
+        let tmp = input("dec")
+        let tmp2 = input("dec")
         let ans = subTwoBinaryLists tmp tmp2
         //print it nicely
-        printnice tmp tmp2 operator
-        printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+        printnice tmp tmp2 operator ans "dec"
+        //printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
         true
     | "QUIT" |_ -> 
         printfn $"GOOD BYE!!"
