@@ -101,7 +101,7 @@ let addTwoBinaryLists binList1 binList2 =
 // -----------------------------------------------------------------------------------------------------
 // 2 compliment 
 // should i use |> not sure if you can here... 
-let twosCompliement binList =
+let twosComplement binList =
     // first run the number through the not pipeline
     let notBinList = notPipeline binList
     // this will be our 1
@@ -122,7 +122,7 @@ let  signedToBase2List num =
         // get the base two list for the absolute value then the twos compliment of that 
         absnum
         |> unsignedToBase2List
-        |> twosCompliement
+        |> twosComplement
     //it's a positive number so just used unsigned function
     |_-> unsignedToBase2List num
 
@@ -132,7 +132,7 @@ let  signedToBase2List num =
 // subtracting is just multiplying the second number by -1
 //which is this case just means running it through two's compliement and then adding the two numbers :) 
 let subTwoBinaryLists binList1 binList2 =
-    addTwoBinaryLists binList1 (twosCompliement binList2)
+    addTwoBinaryLists binList1 (twosComplement binList2)
 
 // -----------------------------------------------------------------------------------------------------
 // takes in a bit list and returns the signed number   
@@ -143,7 +143,7 @@ let  base2ListToSigned (bitlist: int list) =
         //printfn $"bitlist = %A{bitlist}"
         //this is a negative number we convert it back into a positive bit 2 list, and turn that into a decimal number 
         let num = bitlist 
-                    |> twosCompliement
+                    |> twosComplement
                     |> base2listtoUnsigned
         //then multiply it by -1 
         num * -1
