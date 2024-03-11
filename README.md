@@ -129,6 +129,13 @@ ADD      [0; 0; 0; 0; 0; 0; 0; 1]
 --------------------------------------------
          [1; 0; 0; 0; 0; 0; 0; 1] = -127
 
+```
+
+I was just having fun with overflow(??) here, since we only go from -128 to 127 it seems to loop back on itself 
+when you go over or below those numbers... interesting :) 
+
+```
+
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): sub
 Enter first number : -128
 Enter second number: 1
