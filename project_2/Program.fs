@@ -1,5 +1,6 @@
 ﻿// -----------------------------------------------------------------------------------------------------
-// functions for logical operators everything seems to be working fine, now with matching :)  
+// BASIC LOGICAL OPERATORS 
+
 let not x =
     match x with
     | 1 -> 0
@@ -21,7 +22,7 @@ let xorfun x y =
     |_ -> 0
 
 // -----------------------------------------------------------------------------------------------------
-// THE PIELINE FOR THE LOGICAL OPERTORS 
+// THE PIPELINE FOR THE LOGICAL OPERTORS 
 
 // this runs a list through the functions so the pipeline I guess
 let notPipeline values =
@@ -41,8 +42,7 @@ let xorPipeline  = List.map2 (xorfun)
 
 let StringToInt string (toBase:int) = System.Convert.ToInt32(string, toBase)
 
-// -----------------------------------------------------------------------------------------------------
-//pretty sure all these can be done with matching as well 
+// ----------------------------------------------------------------------------------------------------- 
 // CONEVRT unsigned to base 2 list  
 
 let unsignedToBase2List num =
@@ -53,7 +53,6 @@ let unsignedToBase2List num =
         //tail recursion to check how many 2^i there are 
         |_->  loop (n >>> 1 ) (n % 2 :: acc) (i + 1)
     loop num [] 0
-
 
 
 // -----------------------------------------------------------------------------------------------------
@@ -68,15 +67,14 @@ let base2listtoUnsigned base2list =
         |_-> loop list.Tail ((num <<< 1) + list.Head)
     loop base2list 0
 
-
+//an old test
 //let list1 = unsignedToBase2List 20 
-
 //printfn $"processing %A{list1} through 'base2listtoUnsigned' produces: %A{base2listtoUnsigned list1}\n"
 
 // -----------------------------------------------------------------------------------------------------
-// ADDING??? 
+// ADDING 
 
-// not the best but seems to work
+// reword from a stack overflow example
 let addTwoBinaryLists binList1 binList2 =
     // our loop with accumalter and carry
     let rec loop (binList1: int list)  (binList2: int list) acc carry =
@@ -154,25 +152,31 @@ let  base2ListToSigned (bitlist: int list) =
 
 //    //seems to work
 //let bitlist = signedToBase2List 20
-
 //printfn $"processing %A{bitlist} through 'Base2ListToSigned' produces: %A{base2ListToSigned bitlist}\n"
     
 
-
 // -----------------------------------------------------------------------------------------------------
-// print not sure if this really adds much.. it's very good for certain operations as it makes checking them much easier and not so 
-//good for others 
+// A PRINT FUNCTION
 
-let printnice bitlist1 bitlist2 operator ans vType=
-    printfn $"\t %A{bitlist1}"
-    printfn $"%s{operator}\t %A{bitlist2}"
-    printfn $"--------------------------------------------"
+let printNice bitlist1 bitlist2 operator ans vType=
+    
+    //pretty sure this can be done with less repitation, but it works
+    //ideally I would understanding print spacing a bit better
     match vType with
-    | "hex" -> printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
-    | "dec" -> printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+    | "hex" -> 
+            printfn $"\t %A{bitlist1} = %X{base2listtoUnsigned bitlist1}"
+            printfn $"%s{operator}\t %A{bitlist2} = %X{base2listtoUnsigned bitlist2}"
+            printfn $"--------------------------------------------"
+            printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+    | "dec" -> 
+            printfn $"\t %A{bitlist1} = %i{base2ListToSigned bitlist1}"
+            printfn $"%s{operator}\t %A{bitlist2} = %i{base2ListToSigned bitlist2}"
+            printfn $"--------------------------------------------"
+            printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
 
-// -----------------------------------------------------------------------------------------------------
-// input function so the main function is a little tighter  
+    
+    // -----------------------------------------------------------------------------------------------------
+// AN INPUT FUNCTION  
 
 let input vType= 
 
@@ -192,10 +196,8 @@ let input vType=
         StringToInt byte 10 |> signedToBase2List
 
 // -----------------------------------------------------------------------------------------------------
-// stolen from professor, works fine could use more subprograms
-//Ok I think the loop is working correctly... also stolen from professor
-//idealy they would be more subprograms and less repeated code... will change if there is time,
-//also want to read more of the textbook so might just stay like this 
+// MAIN PROGRAM
+// stolen from professor, 
 
 let result () =
 
@@ -216,23 +218,20 @@ let result () =
         //run it through pipeline
         let ans = andPipeline tmp1 tmp2
         //print results
-        printnice tmp1 tmp2 operator ans "hex"
-        //printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        printNice tmp1 tmp2 operator ans "hex"
         true
     | "OR" -> 
         //the rest follow the same pattern
         let tmp1 = input("hex")
         let tmp2 = input("hex")
         let ans = orPipeline tmp1 tmp2
-        printnice tmp1 tmp2 operator ans "hex"
-        //printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        printNice tmp1 tmp2 operator ans "hex"
         true
     | "XOR" -> 
         let tmp1 = input("hex")
         let tmp2 = input("hex")
         let ans = xorPipeline tmp1 tmp2
-        printnice tmp1 tmp2 operator ans "hex"
-        //printfn $"\t %A{ans} = %X{base2listtoUnsigned ans}"
+        printNice tmp1 tmp2 operator ans "hex"
         true
     | "ADD" -> 
         let tmp1 = input("dec") 
@@ -240,23 +239,22 @@ let result () =
         //add the two 
         let ans = addTwoBinaryLists tmp1 tmp2
         //print it 
-        printnice tmp1 tmp2 operator ans "dec"
-        //printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+        printNice tmp1 tmp2 operator ans "dec"
         true
-    //minus should be pretty simil;ar but I need to multiple the second number by -1 first 
     | "SUB" -> 
         let tmp = input("dec")
         let tmp2 = input("dec")
         let ans = subTwoBinaryLists tmp tmp2
         //print it nicely
-        printnice tmp tmp2 operator ans "dec"
-        //printfn $"\t %A{ans} = %i{base2ListToSigned ans}"
+        printNice tmp tmp2 operator ans "dec"
         true
     | "QUIT" |_ -> 
         printfn $"GOOD BYE!!"
         false
        
-
+// -----------------------------------------------------------------------------------------------------
+// A LOOP for the main program 
+// also stolen from professor 
 let rec prog () =
     // so it runs restults and just keeps looping till result returns false
     match result () with

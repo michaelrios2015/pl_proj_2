@@ -1,138 +1,94 @@
 example output 
 
 ```
+
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): not
-Enter Hex value: A5
+Enter Hex value between 00 and FF: a5
 Result of NOT [1; 0; 1; 0; 0; 1; 0; 1] = [0; 1; 0; 1; 1; 0; 1; 0] = 5A
 
-Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): not
-Enter Hex value: 00
-Result of NOT [0; 0; 0; 0; 0; 0; 0; 0] = [1; 1; 1; 1; 1; 1; 1; 1] = FF
-
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): and
-Enter Hex value: F9
-Enter Hex value: 9f
-         [1; 1; 1; 1; 1; 0; 0; 1]
-AND      [1; 0; 0; 1; 1; 1; 1; 1]
+Enter Hex value between 00 and FF: f9
+Enter Hex value between 00 and FF: 9f
+         [1; 1; 1; 1; 1; 0; 0; 1] = F9
+AND      [1; 0; 0; 1; 1; 1; 1; 1] = 9F
 --------------------------------------------
          [1; 0; 0; 1; 1; 0; 0; 1] = 99
 
-Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): and
-Enter Hex value: 11
-Enter Hex value: 33
-         [0; 0; 0; 1; 0; 0; 0; 1]
-AND      [0; 0; 1; 1; 0; 0; 1; 1]
+Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): or
+Enter Hex value between 00 and FF: 01
+Enter Hex value between 00 and FF: 11
+         [0; 0; 0; 0; 0; 0; 0; 1] = 1
+OR       [0; 0; 0; 1; 0; 0; 0; 1] = 11
 --------------------------------------------
          [0; 0; 0; 1; 0; 0; 0; 1] = 11
-
-Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): or
-Enter Hex value: 01
-Enter Hex value: 11
-         [0; 0; 0; 0; 0; 0; 0; 1]
-OR       [0; 0; 0; 1; 0; 0; 0; 1]
---------------------------------------------
-         [0; 0; 0; 1; 0; 0; 0; 1] = 11
-
-Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): or
-Enter Hex value: 45
-Enter Hex value: ee
-         [0; 1; 0; 0; 0; 1; 0; 1]
-OR       [1; 1; 1; 0; 1; 1; 1; 0]
---------------------------------------------
-         [1; 1; 1; 0; 1; 1; 1; 1] = EF
 
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): xor
-Enter Hex value: ff
-Enter Hex value: 88
-         [1; 1; 1; 1; 1; 1; 1; 1]
-XOR      [1; 0; 0; 0; 1; 0; 0; 0]
+Enter Hex value between 00 and FF: ff
+Enter Hex value between 00 and FF: 88
+         [1; 1; 1; 1; 1; 1; 1; 1] = FF
+XOR      [1; 0; 0; 0; 1; 0; 0; 0] = 88
 --------------------------------------------
          [0; 1; 1; 1; 0; 1; 1; 1] = 77
 
-Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): xor
-Enter Hex value: 13
-Enter Hex value: 74
-         [0; 0; 0; 1; 0; 0; 1; 1]
-XOR      [0; 1; 1; 1; 0; 1; 0; 0]
---------------------------------------------
-         [0; 1; 1; 0; 0; 1; 1; 1] = 67
-
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): add
-Enter first number : 121
-Enter second number: 6
-         [0; 1; 1; 1; 1; 0; 0; 1]
-ADD      [0; 0; 0; 0; 0; 1; 1; 0]
+Enter a number between -128 and 127: 121
+Enter a number between -128 and 127: 6
+         [0; 1; 1; 1; 1; 0; 0; 1] = 121
+ADD      [0; 0; 0; 0; 0; 1; 1; 0] = 6
 --------------------------------------------
          [0; 1; 1; 1; 1; 1; 1; 1] = 127
 
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): add
-Enter first number : 121
-Enter second number: -6
-         [0; 1; 1; 1; 1; 0; 0; 1]
-ADD      [1; 1; 1; 1; 1; 0; 1; 0]
+Enter a number between -128 and 127: 121
+Enter a number between -128 and 127: -6
+         [0; 1; 1; 1; 1; 0; 0; 1] = 121
+ADD      [1; 1; 1; 1; 1; 0; 1; 0] = -6
 --------------------------------------------
          [0; 1; 1; 1; 0; 0; 1; 1] = 115
 
-Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): add
-Enter first number : 3
-Enter second number: -89
-         [0; 0; 0; 0; 0; 0; 1; 1]
-ADD      [1; 0; 1; 0; 0; 1; 1; 1]
---------------------------------------------
-         [1; 0; 1; 0; 1; 0; 1; 0] = -86
-
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): sub
-Enter first number : 5
-Enter second number: 5
-         [0; 0; 0; 0; 0; 1; 0; 1]
-SUB      [0; 0; 0; 0; 0; 1; 0; 1]
+Enter a number between -128 and 127: 5
+Enter a number between -128 and 127: 5
+         [0; 0; 0; 0; 0; 1; 0; 1] = 5
+SUB      [0; 0; 0; 0; 0; 1; 0; 1] = 5
 --------------------------------------------
          [0; 0; 0; 0; 0; 0; 0; 0] = 0
 
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): sub
-Enter first number : 5
-Enter second number: -5
-         [0; 0; 0; 0; 0; 1; 0; 1]
-SUB      [1; 1; 1; 1; 1; 0; 1; 1]
+Enter a number between -128 and 127: 5
+Enter a number between -128 and 127: -5
+         [0; 0; 0; 0; 0; 1; 0; 1] = 5
+SUB      [1; 1; 1; 1; 1; 0; 1; 1] = -5
 --------------------------------------------
          [0; 0; 0; 0; 1; 0; 1; 0] = 10
 
-Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): sub
-Enter first number : 55
-Enter second number: -55
-         [0; 0; 1; 1; 0; 1; 1; 1]
-SUB      [1; 1; 0; 0; 1; 0; 0; 1]
---------------------------------------------
-         [0; 1; 1; 0; 1; 1; 1; 0] = 110
-
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): add
-Enter first number : 64
-Enter second number: 64
-         [0; 1; 0; 0; 0; 0; 0; 0]
-ADD      [0; 1; 0; 0; 0; 0; 0; 0]
+Enter a number between -128 and 127: 64
+Enter a number between -128 and 127: 64
+         [0; 1; 0; 0; 0; 0; 0; 0] = 64
+ADD      [0; 1; 0; 0; 0; 0; 0; 0] = 64
 --------------------------------------------
          [1; 0; 0; 0; 0; 0; 0; 0] = -128
 
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): sub
-Enter first number : 10
-Enter second number: 11
-         [0; 0; 0; 0; 1; 0; 1; 0]
-SUB      [0; 0; 0; 0; 1; 0; 1; 1]
+Enter a number between -128 and 127: 10
+Enter a number between -128 and 127: 11
+         [0; 0; 0; 0; 1; 0; 1; 0] = 10
+SUB      [0; 0; 0; 0; 1; 0; 1; 1] = 11
 --------------------------------------------
          [1; 1; 1; 1; 1; 1; 1; 1] = -1
 
 Enter the operation you want to perform (NOT, OR, AND, XOR, ADD, SUB or QUIT): add
-Enter first number : 128
-Enter second number: 1
-         [1; 0; 0; 0; 0; 0; 0; 0]
-ADD      [0; 0; 0; 0; 0; 0; 0; 1]
+Enter a number between -128 and 127: 128
+Enter a number between -128 and 127: 1
+         [1; 0; 0; 0; 0; 0; 0; 0] = -128
+ADD      [0; 0; 0; 0; 0; 0; 0; 1] = 1
 --------------------------------------------
          [1; 0; 0; 0; 0; 0; 0; 1] = -127
-
 ```
 
 I was just having fun with overflow(??) here, since we only go from -128 to 127 it seems to loop back on itself 
-when you go over or below those numbers... interesting :) 
+when you go over or below those numbers... interesting :)  this is from a sligly earlier version of the program 
 
 ```
 
