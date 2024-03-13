@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mike\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj": {}
+    "C:\\Users\\micha\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj": {}
   },
   "projects": {
-    "C:\\Users\\mike\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj": {
+    "C:\\Users\\micha\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mike\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj",
+        "projectUniqueName": "C:\\Users\\micha\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj",
         "projectName": "project_2",
-        "projectPath": "C:\\Users\\mike\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj",
-        "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mike\\Source\\Repos\\pl_proj_2\\project_2\\obj\\",
+        "projectPath": "C:\\Users\\micha\\Source\\Repos\\pl_proj_2\\project_2\\project_2.fsproj",
+        "packagesPath": "C:\\Users\\micha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\micha\\Source\\Repos\\pl_proj_2\\project_2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\micha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,8 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\8.0.200\\FSharp\\library-packs": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\sdk\\8.0.200\\FSharp\\library-packs": {}
         },
         "frameworks": {
           "net8.0": {

@@ -242,10 +242,10 @@ let result () =
         printNice tmp1 tmp2 operator ans "dec"
         true
     | "SUB" -> 
+        //essentially the same as add
         let tmp = input("dec")
         let tmp2 = input("dec")
         let ans = subTwoBinaryLists tmp tmp2
-        //print it nicely
         printNice tmp tmp2 operator ans "dec"
         true
     | "QUIT" |_ -> 
@@ -256,6 +256,11 @@ let result () =
 // A LOOP for the main program 
 // also stolen from professor 
 let rec prog () =
+    //a small explanation of the program
+    printf "---------------------------------------------------------------------------------------------------------\n"
+    printf "\nThis program only uses 8 bit numbers for calculations 00 to FF for hexidecimal and -128 to 127 for decimal"
+    printf "\nIt will take larger or smaller numbers but it can only return results within those ranges\n"
+    printf "\n---------------------------------------------------------------------------------------------------------\n"
     // so it runs restults and just keeps looping till result returns false
     match result () with
     //so this just says do nothing and the program exits.. neat :) 
